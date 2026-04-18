@@ -112,7 +112,7 @@ class UserManager:
             (role.value, now, user_id),
         )
         self._engine.commit()
-        return cursor.rowcount > 0
+        return bool(cursor.rowcount > 0)
 
     def deactivate_user(self, user_id: str) -> bool:
         """Deactivate a user account."""
@@ -122,7 +122,7 @@ class UserManager:
             (now, user_id),
         )
         self._engine.commit()
-        return cursor.rowcount > 0
+        return bool(cursor.rowcount > 0)
 
     def ensure_admin_exists(self) -> None:
         """Create a default admin user if no admins exist."""
@@ -150,7 +150,7 @@ class UserManager:
             (new_hash, now, user_id),
         )
         self._engine.commit()
-        return cursor.rowcount > 0
+        return bool(cursor.rowcount > 0)
 
     def _hash_password(self, password: str) -> str:
         salt = bcrypt.gensalt()

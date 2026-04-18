@@ -60,7 +60,7 @@ class TokenBlacklist:
             (f"user_revoke_{user_id}_{now}", user_id, now),
         )
         self._engine.commit()
-        return cursor.rowcount
+        return int(cursor.rowcount)
 
     def cleanup_expired(self) -> int:
         """Remove expired entries from the blacklist."""
@@ -70,4 +70,4 @@ class TokenBlacklist:
             (now,),
         )
         self._engine.commit()
-        return cursor.rowcount
+        return int(cursor.rowcount)

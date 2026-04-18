@@ -114,7 +114,7 @@ class InputValidator:
 
         Returns a list of warning messages (empty if clean).
         """
-        warnings = []
+        warnings: list[str] = []
         self._check_dict_recursive(query_dict, warnings, "query")
         return warnings
 

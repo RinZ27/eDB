@@ -92,7 +92,12 @@ async def get_current_user(
     return payload
 
 
-def require_permission(permission: Permission):
+def require_permission(
+    permission: Permission,
+) -> Callable[
+    [AppState, dict[str, Any]],
+    Coroutine[Any, Any, dict[str, Any]],
+]:
     """Create a dependency that checks for a specific permission."""
 
     async def check(
@@ -110,6 +115,6 @@ def require_permission(permission: Permission):
     return check
 
 
-def require_admin():
+def require_admin() -> Callable:
     """Dependency that requires admin role."""
     return require_permission(Permission.ADMIN_USERS)
