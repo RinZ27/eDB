@@ -4,7 +4,7 @@ from __future__ import annotations
 
 import logging
 from collections.abc import Callable, Coroutine
-from typing import Annotated, Any
+from typing import Annotated, Any, cast
 
 from fastapi import Depends, HTTPException, Request, status
 from fastapi.security import HTTPAuthorizationCredentials, HTTPBearer
@@ -43,7 +43,7 @@ class AppState:
 
 def get_app_state(request: Request) -> AppState:
     """Get the shared AppState from the request."""
-    return request.app.state.edb
+    return cast(AppState, request.app.state.edb)
 
 
 def get_database(state: Annotated[AppState, Depends(get_app_state)]) -> Database:
