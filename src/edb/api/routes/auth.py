@@ -61,7 +61,12 @@ def login(
         user_id=user.id,
         username=user.username,
     )
-    return TokenPair(**tokens)
+    return TokenPair(
+        access_token=tokens["access_token"],
+        refresh_token=tokens["refresh_token"],
+        token_type=tokens["token_type"],
+        expires_in=int(tokens["expires_in"]),
+    )
 
 
 @router.post("/refresh", response_model=TokenPair)
@@ -87,7 +92,12 @@ def refresh_token(
         )
 
     tokens = state.jwt_handler.create_token_pair(user.id, user.username, user.role.value)
-    return TokenPair(**tokens)
+    return TokenPair(
+        access_token=tokens["access_token"],
+        refresh_token=tokens["refresh_token"],
+        token_type=tokens["token_type"],
+        expires_in=int(tokens["expires_in"]),
+    )
 
 
 @router.get("/me", response_model=UserResponse)
