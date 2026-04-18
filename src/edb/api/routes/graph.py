@@ -89,7 +89,7 @@ def add_edge(
         request.relationship,
         request.properties,
     )
-    return edge
+    return cast(dict[str, Any], edge)
 
 
 @router.get("/nodes/{node_id}/edges")
