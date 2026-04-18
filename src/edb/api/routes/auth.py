@@ -113,7 +113,7 @@ def change_password(
     body: dict[str, str],
     user: Annotated[dict[str, Any], Depends(get_current_user)],
     state: Annotated[AppState, Depends(get_app_state)],
-):
+) -> dict[str, str]:
     """Change the current user's password."""
     result = state.user_manager.change_password(
         user["sub"], body["current_password"], body["new_password"]
@@ -129,6 +129,6 @@ def change_password(
 @router.post("/logout")
 def logout(
     user: Annotated[dict[str, Any], Depends(get_current_user)],
-):
+) -> dict[str, str]:
     """Log out the current user (client should discard tokens)."""
     return {"message": "Logged out successfully"}
