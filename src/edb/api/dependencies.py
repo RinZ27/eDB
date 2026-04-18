@@ -22,8 +22,6 @@ logger = logging.getLogger("edb.api")
 security_scheme = HTTPBearer(auto_error=False)
 
 
-
-
 class AppState:
     """Shared application state holding all service instances."""
 

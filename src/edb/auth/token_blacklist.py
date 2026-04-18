@@ -32,7 +32,9 @@ class TokenBlacklist:
         """)
         self._engine.commit()
 
-    def revoke(self, token_jti: str, user_id: str | None = None, expires_at: str | None = None) -> None:
+    def revoke(
+        self, token_jti: str, user_id: str | None = None, expires_at: str | None = None
+    ) -> None:
         """Add a token to the blacklist."""
         now = datetime.now(UTC).isoformat()
         self._engine.execute(

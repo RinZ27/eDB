@@ -17,8 +17,6 @@ from edb.auth.models import (
 router = APIRouter()
 
 
-
-
 @router.post("/register", response_model=UserResponse, status_code=201)
 def register(
     user_data: UserCreate,

@@ -16,8 +16,6 @@ USERS_TABLE = "_edb_users"
 logger = logging.getLogger("edb.auth.users")
 
 
-
-
 USERS_TABLE = "_edb_users"
 
 
@@ -78,9 +76,7 @@ class UserManager:
 
     def get_by_id(self, user_id: str) -> User | None:
         """Get a user by ID."""
-        row = self._engine.fetchone(
-            f'SELECT * FROM "{USERS_TABLE}" WHERE id = ?', (user_id,)
-        )
+        row = self._engine.fetchone(f'SELECT * FROM "{USERS_TABLE}" WHERE id = ?', (user_id,))
         return self._row_to_user(row) if row else None
 
     def get_by_username(self, username: str) -> User | None:
@@ -130,11 +126,13 @@ class UserManager:
             f'SELECT id FROM "{USERS_TABLE}" WHERE role = ?', (Role.ADMIN.value,)
         )
         if row is None:
-            self.create_user(UserCreate(
-                username="admin",
-                password="admin1234",
-                role=Role.ADMIN,
-            ))
+            self.create_user(
+                UserCreate(
+                    username="admin",
+                    password="admin1234",
+                    role=Role.ADMIN,
+                )
+            )
 
     def change_password(self, user_id: str, current_password: str, new_password: str) -> bool:
         """Change a user password after verifying the current one."""

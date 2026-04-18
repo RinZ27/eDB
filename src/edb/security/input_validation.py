@@ -118,9 +118,7 @@ class InputValidator:
         self._check_dict_recursive(query_dict, warnings, "query")
         return warnings
 
-    def _check_dict_recursive(
-        self, data: Any, warnings: list[str], path: str
-    ) -> None:
+    def _check_dict_recursive(self, data: Any, warnings: list[str], path: str) -> None:
         if isinstance(data, str):
             if self.check_sql_injection(data):
                 warnings.append(f"Potential SQL injection at {path}: {data[:50]}")

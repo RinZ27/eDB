@@ -84,7 +84,10 @@ def add_edge(
     user: Annotated[dict[str, Any], Depends(require_permission(Permission.DB_WRITE))],
 ) -> dict[str, Any]:
     edge = state.database.graph.add_edge(
-        request.source_id, request.target_id, request.relationship, request.properties,
+        request.source_id,
+        request.target_id,
+        request.relationship,
+        request.properties,
     )
     return edge
 
